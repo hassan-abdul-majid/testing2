@@ -1,0 +1,156 @@
+// ============================================================================
+// MSU Enterprise UI — Dropdowns & popovers
+// ----------------------------------------------------------------------------
+// Odoo 18 dropdowns render as `.o-dropdown--menu` popovers (portaled to body).
+// Core already sets max-height: 70vh + overflow: auto. Keep that so long
+// navbar / search menus stay inside the white box with a scrollbar.
+// ============================================================================
+
+.o-dropdown--menu {
+    border: 1px solid var(--msu-border);
+    border-radius: var(--msu-radius);
+    box-shadow: var(--msu-shadow-pop);
+    padding: 6px;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    // Opacity only: transform/scale is included in getBoundingClientRect, so
+    // Odoo parks the popover a few pixels off (search bar looks like it jumped).
+    animation: msu-dropdown-in var(--msu-dur) var(--msu-ease);
+
+    .dropdown-item:not(select):not(.o_add_custom_group_menu),
+    .o-dropdown-item:not(select):not(.o_add_custom_group_menu),
+    .o_menu_item:not(select):not(.o_add_custom_group_menu),
+    .o_item_option {
+        border-radius: 6px;
+        padding: 5px 12px;
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+        transition: background-color var(--msu-dur-fast) var(--msu-ease),
+                    color var(--msu-dur-fast) var(--msu-ease);
+
+        &:hover,
+        &.focus,
+        &:focus,
+        &.o-navigable-active,
+        &.focused {
+            background-color: var(--msu-surface-2);
+        }
+
+        &.selected,
+        &.active {
+            background-color: rgba(var(--msu-accent-rgb), .16) !important;
+            color: var(--msu-accent) !important;
+            font-weight: 600;
+            padding-left: 30px;
+            box-shadow: inset 0 0 0 1px rgba(var(--msu-accent-rgb), .18);
+
+            &:hover,
+            &:focus {
+                background-color: rgba(var(--msu-accent-rgb), .22) !important;
+                color: var(--msu-accent) !important;
+            }
+        }
+
+        // Core parks the FA check at translate(-1.5em, 90%) — it clips into a
+        // teal sliver on the rounded corner. Sit the tick inside the chip.
+        &.selected:not(.dropdown-item_active_noarrow)::before,
+        &.active:not(.dropdown-item_active_noarrow)::before {
+            content: "\f00c" !important;
+            font: 12px / 1 FontAwesome !important;
+            color: var(--msu-action) !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 10px !important;
+            right: auto !important;
+            bottom: auto !important;
+            transform: translateY(-50%) !important;
+            display: block !important;
+            width: auto !important;
+            height: auto !important;
+            background: none !important;
+            border: 0 !important;
+            opacity: 1 !important;
+            pointer-events: none;
+        }
+    }
+
+    // Add Custom Group is an OWL dropdown button, not a native <select>.
+    .o_add_custom_group_menu {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin: 6px 0 2px;
+        padding: 5px 12px;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: inherit;
+        text-align: left;
+        line-height: 1.25;
+        cursor: pointer;
+        box-shadow: none !important;
+
+        &:hover,
+        &:focus,
+        &.show {
+            background-color: var(--msu-surface-2);
+            outline: none;
+            box-shadow: none !important;
+        }
+
+        &::before {
+            content: none !important;
+            display: none !important;
+        }
+    }
+
+    .dropdown-divider {
+        margin: 6px 4px;
+        border-color: var(--msu-border);
+    }
+
+    .dropdown-header {
+        color: var(--msu-text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .4px;
+        font-size: .72em;
+    }
+}
+
+@keyframes msu-dropdown-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+// Search Filters / Group By / Favorites: one white panel, one scrollbar.
+// Kill mx-auto — auto margins throw off the popover's left/top math.
+.o-dropdown--menu.o_search_bar_menu {
+    padding: .75rem 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+// Autocomplete lives inside the search pill; do not treat it as a popover.
+// Keep it above sticky list/kanban headers (those use z-index: 1).
+.o_searchview_autocomplete.o-dropdown--menu {
+    animation: none !important;
+    overflow: visible !important;
+    max-height: none;
+    padding: 4px;
+    z-index: 20;
+    opacity: 1 !important;
+    background-color: var(--msu-surface, #fff) !important;
+}
+
+// Field picker for Add Custom Group: compact list beside the button.
+.o-dropdown--menu.o_msu_custom_group_menu {
+    max-height: 280px !important;
+    min-width: 240px;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    padding: 6px;
+}

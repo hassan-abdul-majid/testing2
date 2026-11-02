@@ -1,0 +1,163 @@
+// ============================================================================
+// MSU Enterprise UI — Command palette
+// ----------------------------------------------------------------------------
+// Inner-content polish only. Do not transform/scale `.modal-dialog` (that
+// recenters the overlay and jumps the box when the scrollbar is hidden).
+// ============================================================================
+
+.o_command_palette {
+    border: none !important;
+    border-radius: var(--msu-radius-lg) !important;
+    box-shadow: var(--msu-shadow-pop);
+    overflow: hidden;
+    background: var(--msu-surface);
+
+    > .modal-body {
+        padding: 0;
+    }
+
+    a:focus,
+    a:focus-visible,
+    .o_command:focus,
+    .o_command:focus-visible {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .o_command_palette_search {
+        margin-bottom: 0 !important;
+        padding: .95rem 1.15rem !important;
+        border-bottom: 1px solid var(--msu-border) !important;
+        background: var(--msu-surface);
+        align-items: center;
+
+        .o_namespace {
+            color: var(--msu-accent);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .form-control {
+            font-size: 1.05rem;
+            font-weight: 400;
+            letter-spacing: .01em;
+            color: var(--msu-text);
+            background: transparent;
+            box-shadow: none !important;
+
+            &::placeholder {
+                color: var(--msu-text-muted);
+                opacity: .7;
+            }
+        }
+
+        .input-group-text {
+            color: var(--msu-text-muted);
+            opacity: .55;
+            font-size: 1.05rem;
+        }
+    }
+
+    .o_command_palette_listbox {
+        padding: 6px 0 8px;
+
+        .o_command_category {
+            > .text-uppercase {
+                display: block;
+                padding: .55rem 1.15rem .25rem;
+                color: var(--msu-text-muted);
+                font-size: .68rem !important;
+                font-weight: 600 !important;
+                letter-spacing: .06em;
+            }
+        }
+
+        .o_command {
+            margin: 1px 8px;
+            border: none;
+            border-radius: var(--msu-radius-sm);
+            box-shadow: none;
+            outline: none;
+            transition: background-color var(--msu-dur-fast) var(--msu-ease);
+
+            > a {
+                display: block;
+                padding: 2px 0;
+                outline: none !important;
+                box-shadow: none !important;
+            }
+
+            .o_command_hotkey,
+            .o_command_name {
+                padding-left: .35rem;
+            }
+
+            &:hover:not(.focused) {
+                background: var(--msu-surface-2);
+            }
+
+            &.focused {
+                background: rgba(var(--msu-accent-rgb), .1);
+                box-shadow: none;
+                border: none;
+            }
+
+            .o_command_name {
+                font-weight: 400;
+                color: var(--msu-text);
+
+                b.text-primary,
+                .text-primary {
+                    font-weight: 600;
+                    color: var(--msu-accent) !important;
+                }
+            }
+
+            .o_command_focus {
+                opacity: .85;
+            }
+        }
+
+        .o_command_palette_listbox_empty {
+            color: var(--msu-text-muted);
+            font-style: normal;
+            padding: 1.25rem 1.15rem !important;
+        }
+    }
+
+    hr {
+        border-color: var(--msu-border);
+        opacity: 1;
+        margin: 6px 12px !important;
+    }
+
+    kbd {
+        display: inline-block;
+        min-width: 1.4em;
+        padding: 1px 6px;
+        font-size: .68rem;
+        font-weight: 600;
+        line-height: 1.5;
+        color: var(--msu-text);
+        background: var(--msu-surface-2);
+        border: 1px solid var(--msu-border);
+        border-bottom-width: 2px;
+        border-radius: 4px;
+    }
+
+    .o_command_palette_footer {
+        margin-top: 0 !important;
+        padding: .55rem 1.15rem !important;
+        background: var(--msu-surface-2) !important;
+        border-top: 1px solid var(--msu-border) !important;
+        color: var(--msu-text-muted) !important;
+        font-size: .78rem;
+        letter-spacing: .01em;
+
+        .fw-bolder,
+        .text-primary {
+            font-weight: 600 !important;
+            color: var(--msu-accent) !important;
+        }
+    }
+}

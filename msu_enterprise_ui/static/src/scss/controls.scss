@@ -1,0 +1,169 @@
+// ============================================================================
+// MSU Enterprise UI — Controls, cards, inputs & surfaces
+// ----------------------------------------------------------------------------
+// Broad, low-risk polish: elevated cards, softer sheets, nicer inputs, refined
+// list/kanban surfaces and a gentle content fade-in for perceived speed.
+// ============================================================================
+
+.o_web_client {
+
+    // -- Control panel (action header) --------------------------------------
+    .o_control_panel {
+        position: relative;
+        z-index: 5; // above sticky list headers so search autocomplete is not covered
+        border-bottom: 1px solid var(--msu-border);
+        background: var(--msu-surface);
+
+        .o_last_breadcrumb_item {
+            font-weight: 500;
+            letter-spacing: .01em;
+        }
+        .o_back_button {
+            border-radius: var(--msu-radius-sm);
+            transition: background-color var(--msu-dur-fast) var(--msu-ease);
+        }
+        .o_cp_action_menus .dropdown-toggle,
+        .o_searchview {
+            transition: background-color var(--msu-dur-fast) var(--msu-ease),
+                        border-color var(--msu-dur-fast) var(--msu-ease);
+        }
+    }
+
+    // -- Search bar: pill chrome lives in chrome.scss ------------------------
+    .o_searchview {
+        transition: border-color var(--msu-dur-fast) var(--msu-ease);
+
+        &:focus-within {
+            box-shadow: none;
+        }
+    }
+
+    // -- Form sheet: card-like elevation -------------------------------------
+    .o_form_view .o_form_sheet_bg .o_form_sheet {
+        border: 1px solid var(--msu-border);
+        border-radius: var(--msu-radius-lg);
+        box-shadow: var(--msu-shadow-2);
+    }
+
+    // -- Kanban cards: elevation + hover lift --------------------------------
+    .o_kanban_view .o_kanban_record {
+        border-radius: var(--msu-radius);
+        border: 1px solid var(--msu-border);
+        box-shadow: var(--msu-shadow-1);
+        transition: box-shadow var(--msu-dur) var(--msu-ease),
+                    transform var(--msu-dur) var(--msu-ease);
+
+        &:hover {
+            box-shadow: var(--msu-shadow-3);
+            transform: translateY(-2px);
+        }
+    }
+
+    // -- List view: rounded container + comfortable rows ---------------------
+    .o_list_view .o_list_table {
+        thead th {
+            border-bottom: 2px solid var(--msu-border);
+            font-weight: 500;
+            color: var(--msu-text-muted);
+            letter-spacing: .01em;
+        }
+        tbody tr {
+            transition: background-color var(--msu-dur-fast) var(--msu-ease);
+            &:hover {
+                background-color: var(--msu-surface-2);
+            }
+            &.o_data_row_selected,
+            &.table-info {
+                background-color: rgba(var(--msu-accent-rgb), .07);
+            }
+        }
+    }
+
+    // -- Inputs: minimalist focus (border only, Enterprise) ------------------
+    .form-control,
+    .o_input,
+    .form-select {
+        border-radius: var(--msu-radius-sm);
+        transition: border-color var(--msu-dur-fast) var(--msu-ease);
+
+        &:focus,
+        &:focus-visible {
+            box-shadow: none;
+            outline: none;
+        }
+    }
+
+    // -- Notebook (form tabs): animated active indicator ---------------------
+    .o_notebook .o_notebook_headers .nav-link {
+        border: 0;
+        position: relative;
+        transition: color var(--msu-dur) var(--msu-ease);
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: .75rem;
+            right: .75rem;
+            bottom: 0;
+            height: 2px;
+            background: var(--msu-accent);
+            border-radius: 2px 2px 0 0;
+            transform: scaleX(0);
+            transition: transform var(--msu-dur) var(--msu-ease);
+        }
+        &.active::after {
+            transform: scaleX(1);
+        }
+    }
+
+    // -- Statusbar / stat buttons -------------------------------------------
+    .o_statusbar_status .o_arrow_button {
+        transition: background-color var(--msu-dur) var(--msu-ease),
+                    color var(--msu-dur) var(--msu-ease);
+    }
+
+    .oe_stat_button {
+        border-radius: var(--msu-radius-sm);
+        transition: background-color var(--msu-dur-fast) var(--msu-ease);
+
+        &:hover {
+            background-color: var(--msu-surface-2);
+        }
+    }
+
+    .o_form_view .o_group .o_form_label,
+    .o_form_view .o_inner_group .o_form_label {
+        font-weight: 500;
+        color: var(--msu-text-muted);
+    }
+
+    .o-mail-Composer,
+    .o-mail-Composer-input {
+        border-radius: var(--msu-radius);
+    }
+
+    .o-mail-Chatter {
+        .o-mail-Chatter-top {
+            border-bottom-color: var(--msu-border);
+        }
+    }
+
+    // -- Small screens: keep sheets and toolbars usable ----------------------
+    @include media-breakpoint-down(md) {
+        .o_form_view .o_form_sheet_bg .o_form_sheet {
+            border-radius: var(--msu-radius);
+            margin-left: .5rem;
+            margin-right: .5rem;
+        }
+
+        .o_kanban_view .o_kanban_record:hover {
+            transform: none;
+        }
+
+        .o_control_panel {
+            .o_last_breadcrumb_item {
+                font-size: .95rem;
+            }
+        }
+    }
+}

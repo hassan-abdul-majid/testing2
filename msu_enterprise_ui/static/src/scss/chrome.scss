@@ -1,0 +1,520 @@
+// ============================================================================
+// MSU Enterprise UI — Control-panel chrome (all modules)
+// ----------------------------------------------------------------------------
+// Pill search, lavender filter chips, segmented view switcher, pill stages,
+// outline New + cloud save / discard.
+// ============================================================================
+
+.o_web_client {
+
+    // -- Search bar: full pill ----------------------------------------------
+    .o_cp_searchview.input-group,
+    .o_control_panel_actions .o_cp_searchview {
+        border: 1px solid var(--msu-border);
+        border-radius: 999px;
+        background: var(--msu-surface);
+        overflow: visible;
+        min-height: 38px;
+        box-shadow: none;
+        transition: border-color var(--msu-dur-fast) var(--msu-ease),
+                    box-shadow var(--msu-dur-fast) var(--msu-ease);
+
+        &:focus-within {
+            border-color: #cfc3d6;
+            // Inset ring: an outer 2px spread made the pill look like it jumped left.
+            box-shadow: inset 0 0 0 1px rgba(113, 75, 103, 0.22);
+        }
+
+        .o_searchview {
+            border: 0 !important;
+            border-radius: 999px 0 0 999px !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            min-height: 36px;
+            padding: 3px 8px 3px 12px;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px;
+            min-width: 0;
+
+            &:focus-within {
+                border-color: transparent !important;
+                box-shadow: none !important;
+            }
+
+            // Keep the magnifying glass in-flow so chips cannot slide under it.
+            > button.btn {
+                flex: 0 0 auto !important;
+                width: auto !important;
+                min-width: 1.25rem !important;
+                transform: none !important;
+                box-shadow: none !important;
+                outline: none !important;
+                z-index: 0 !important;
+                overflow: visible !important;
+
+                &:hover,
+                &:focus,
+                &:active,
+                &:focus-visible {
+                    transform: none !important;
+                    box-shadow: none !important;
+                    outline: none !important;
+                }
+            }
+
+            .o_searchview_input_container {
+                min-width: 0;
+                flex: 1 1 auto;
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+        .o_searchview_dropdown_toggler {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            align-self: stretch !important;
+            border: 0 !important;
+            border-left: 1px solid var(--msu-border) !important;
+            border-radius: 0 999px 999px 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            transform: none !important;
+            min-width: 38px;
+            padding: 0 !important;
+            line-height: 1 !important;
+
+            &::after {
+                margin: 0 !important;
+                line-height: 1 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 1em;
+                position: static !important;
+            }
+
+            &:hover,
+            &:focus,
+            &:active,
+            &.show {
+                background: var(--msu-surface-2) !important;
+                box-shadow: none !important;
+                transform: none !important;
+            }
+        }
+    }
+
+    .o_searchview_icon {
+        display: block;
+        flex-shrink: 0;
+        width: 1em;
+        margin-inline-end: 0 !important;
+        color: var(--msu-text);
+        opacity: .75;
+        font-size: 1rem;
+        line-height: 1;
+        text-align: center;
+    }
+
+    .o_searchview_input::placeholder {
+        color: var(--msu-text-muted);
+        opacity: .7;
+    }
+
+    // -- Search chips: light highlight around icon + searched text + x ------
+    .o_searchview_facet {
+        background: #efe8f4 !important;
+        border: 0 !important;
+        border-radius: 10px !important;
+        overflow: visible !important;
+        align-items: center !important;
+        flex: 0 1 auto;
+        max-width: 100%;
+        gap: 4px;
+        min-height: 28px;
+        max-height: none;
+        padding: 3px 4px 3px 3px !important;
+        box-shadow: none !important;
+        animation: none;
+        transform: none !important;
+        z-index: 1;
+
+        > .position-absolute {
+            display: none !important;
+        }
+
+        .o_searchview_facet_label {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            align-self: center !important;
+            flex: 0 0 auto !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            height: 24px !important;
+            min-height: 24px !important;
+            max-height: 24px !important;
+            margin: 0 !important;
+            padding: 0 10px !important;
+            border: 0 !important;
+            border-radius: 8px !important;
+            background: #e4d8ee !important;
+            color: #5a4568 !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            box-shadow: none !important;
+            transform: none !important;
+            overflow: visible !important;
+            line-height: 1 !important;
+            white-space: nowrap;
+
+            small {
+                padding: 0 !important;
+                font-size: 13px !important;
+                font-weight: 600 !important;
+                color: inherit !important;
+            }
+
+            &.btn,
+            &.btn-primary,
+            &.btn-favourite,
+            &.text-bg-action,
+            &.rounded-start-2 {
+                background: #e4d8ee !important;
+                color: #5a4568 !important;
+                border: 0 !important;
+                border-radius: 8px !important;
+                width: auto !important;
+                padding: 0 10px !important;
+            }
+
+            &:hover,
+            &:focus,
+            &:active,
+            &:focus-visible {
+                background: #e4d8ee !important;
+                color: #5a4568 !important;
+                box-shadow: none !important;
+                transform: none !important;
+                outline: none !important;
+            }
+
+            // Ripple + cog overlay were painting a square on hover
+            &::before,
+            .position-absolute,
+            .opacity-100-hover {
+                display: none !important;
+            }
+
+            i,
+            .fa,
+            .oi {
+                font-size: 11px !important;
+                color: #5a4568 !important;
+                line-height: 1;
+            }
+
+            // Filter/group icons only: keep the round tile
+            &:has(> i),
+            &:has(> .fa),
+            &:has(> .oi) {
+                width: 20px !important;
+                min-width: 20px !important;
+                max-width: 20px !important;
+                height: 20px !important;
+                min-height: 20px !important;
+                padding: 0 !important;
+                border-radius: 999px !important;
+                overflow: hidden !important;
+                background: #d4c4e4 !important;
+            }
+        }
+
+        .o_facet_values {
+            background: transparent !important;
+            padding-left: 2px !important;
+            color: var(--msu-text) !important;
+        }
+
+        .o_facet_value {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--msu-text) !important;
+        }
+
+        .o_facet_values_sep {
+            font-style: italic;
+            font-weight: 400;
+            opacity: .55;
+            color: var(--msu-text-muted) !important;
+        }
+
+        .o_facet_remove {
+            color: var(--msu-text) !important;
+            opacity: .55;
+            padding-left: 2px !important;
+            padding-right: 8px !important;
+
+            &:hover {
+                opacity: 1;
+                color: var(--msu-text) !important;
+            }
+        }
+    }
+
+    // -- View switcher: white pill, gray inner highlight (no teal) ----------
+    .o_cp_switch_buttons.btn-group,
+    nav.o_cp_switch_buttons {
+        border: 1px solid var(--msu-border);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--msu-surface);
+        padding: 3px;
+        gap: 0;
+
+        .btn,
+        .o_switch_view {
+            border: 0 !important;
+            border-radius: 8px !important;
+            background: transparent !important;
+            color: var(--msu-text) !important;
+            box-shadow: none !important;
+            transform: none !important;
+            min-width: 34px;
+            padding: 5px 10px;
+            z-index: 0 !important;
+
+            &:hover:not(.active) {
+                background: #eceef2 !important;
+                box-shadow: none !important;
+                transform: none !important;
+            }
+
+            &.active,
+            &.active:hover,
+            &.active:focus {
+                background: #eceef2 !important;
+                color: var(--msu-text) !important;
+                box-shadow: none !important;
+                border-radius: 8px !important;
+                z-index: 1 !important;
+            }
+        }
+    }
+
+    // -- Pager: one rounded group -------------------------------------------
+    .o_cp_pager {
+        .btn-group {
+            gap: 0;
+            border: 1px solid var(--msu-border);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--msu-surface);
+            padding: 2px;
+        }
+
+        .btn {
+            border-radius: 8px !important;
+            background: transparent !important;
+            border-color: transparent !important;
+            color: var(--msu-text);
+            box-shadow: none !important;
+            transform: none !important;
+
+            &:hover:not(:disabled) {
+                background: #eceef2 !important;
+                box-shadow: none !important;
+                transform: none !important;
+            }
+        }
+    }
+
+    // -- New / primary chrome buttons ---------------------------------------
+    .o_control_panel_main_buttons {
+        .btn-primary,
+        .o_list_button_add,
+        .o_form_button_create,
+        .o-kanban-button-new,
+        .o_kanban_button_new {
+            background: #9b6d8c !important;
+            color: #fff !important;
+            border: 1px solid #9b6d8c !important;
+            border-radius: 10px !important;
+            box-shadow: none !important;
+            font-weight: 500;
+            transform: none !important;
+
+            &:hover,
+            &:focus {
+                background: #8a5f7c !important;
+                color: #fff !important;
+                border-color: #8a5f7c !important;
+                box-shadow: none !important;
+                transform: none !important;
+            }
+
+            &:active,
+            &.active,
+            &:active:focus {
+                background: #7d5470 !important;
+                color: #fff !important;
+                border-color: #7d5470 !important;
+                box-shadow: none !important;
+                transform: none !important;
+            }
+        }
+    }
+
+    // -- Breadcrumbs: teal parent, bold current -----------------------------
+    .o_control_panel_breadcrumbs {
+        .breadcrumb-item a,
+        .o_back_button a {
+            color: var(--msu-action) !important;
+            font-weight: 500;
+        }
+
+        .o_last_breadcrumb_item {
+            font-weight: 700;
+            color: var(--msu-text);
+            letter-spacing: 0;
+        }
+
+        .o_cp_action_menus .btn {
+            box-shadow: none !important;
+            transform: none !important;
+            color: var(--msu-text);
+
+            &:hover {
+                background: var(--msu-surface-2) !important;
+                transform: none !important;
+            }
+        }
+    }
+
+    // -- Save / discard (cloud + X) with divider ----------------------------
+    .o_form_status_indicator {
+        align-items: center;
+    }
+
+    .o_form_status_indicator_buttons:not(.invisible) {
+        border-left: 1px solid var(--msu-border);
+        margin-left: 6px;
+        padding-left: 8px;
+        gap: 2px;
+
+        .btn {
+            border-radius: 8px !important;
+            color: var(--msu-text) !important;
+            transform: none !important;
+            box-shadow: none !important;
+
+            &:hover {
+                background: var(--msu-surface-2) !important;
+                transform: none !important;
+            }
+        }
+    }
+
+    // -- Stages: outer pill + inner gray chip + ›  (no extra height) --------
+    // Do not add vertical padding/margin/border: StatusBarField hides stages
+    // when the root is taller than the first visible item.
+    .o_field_statusbar > .o_statusbar_status,
+    .o_form_statusbar .o_statusbar_status {
+        --o-statusbar-caret-width: 0px;
+        --o-statusbar-radius: 999px;
+        background: var(--msu-surface);
+        border: 0;
+        border-radius: 999px;
+        padding: 0 6px;
+        box-shadow: 0 0 0 1px var(--msu-border);
+        align-items: stretch;
+
+        > .o_arrow_button:not(.d-none) {
+            clip-path: none !important;
+            margin: 0 !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+            color: var(--msu-text-muted) !important;
+            font-weight: 400 !important;
+            padding: 8px 10px !important;
+            box-shadow: none !important;
+            transform: none !important;
+            flex: 0 0 auto !important;
+            position: relative;
+            overflow: visible !important;
+            opacity: 1 !important;
+            line-height: 1.25;
+
+            &::before {
+                display: none !important;
+                content: none !important;
+            }
+
+            &:hover:not(.o_arrow_button_current):not(:disabled),
+            &:focus:not(.o_arrow_button_current) {
+                background: transparent !important;
+                color: var(--msu-text) !important;
+            }
+
+            &.o_arrow_button_current,
+            &.o_arrow_button_current:disabled,
+            &:active:not(.o_last) {
+                z-index: 1;
+                isolation: isolate;
+                background: transparent !important;
+                color: var(--msu-text) !important;
+                font-weight: 600 !important;
+                box-shadow: none !important;
+
+                &::before {
+                    display: block !important;
+                    content: "" !important;
+                    position: absolute !important;
+                    inset: 4px 4px !important;
+                    background: #e4e6ec !important;
+                    border-radius: 8px !important;
+                    clip-path: none !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                    pointer-events: none;
+                    z-index: -1;
+                }
+
+                // › lives on the previous stage; keep it outside this chip.
+                &:not(.o_first)::before {
+                    inset: 4px 22px 4px 4px !important;
+                }
+            }
+
+            &:not(.o_first):not(.dropdown-toggle)::after {
+                content: "\203A";
+                position: relative;
+                z-index: 1;
+                display: inline-block;
+                margin-left: 10px;
+                color: #8b909c;
+                font-weight: 500;
+                font-size: 1.05em;
+                line-height: 1;
+                pointer-events: none;
+            }
+
+            &.o_first {
+                padding-right: 12px !important;
+            }
+
+            &.o_last {
+                padding-left: 12px !important;
+            }
+
+            &.dropdown-toggle::after {
+                content: none;
+            }
+        }
+    }
+}

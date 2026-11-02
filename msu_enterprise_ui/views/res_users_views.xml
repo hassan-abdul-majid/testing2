@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_simple_modif_color_scheme" model="ir.ui.view">
+        <field name="name">res.users.preferences.form.color.scheme</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='preferences']/group[2]" position="inside">
+                <field name="color_scheme" string="Theme" widget="radio" readonly="0"
+                    help="System follows your device. Light and Dark stay fixed until you change them."/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

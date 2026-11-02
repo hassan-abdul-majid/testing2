@@ -1,0 +1,123 @@
+// ============================================================================
+// MSU Enterprise UI — Button color system
+// ----------------------------------------------------------------------------
+// Adds a consistent, premium treatment (radius, elevation, motion, focus ring)
+// on top of Bootstrap/Odoo buttons for every contextual variant. We only tune
+// shared behaviour + focus/disabled states; base colours stay Bootstrap-driven
+// so third-party modules remain compatible.
+// ============================================================================
+
+.o_web_client {
+    .btn {
+        border-radius: var(--msu-radius-sm);
+        font-weight: 500;
+        transition: background-color var(--msu-dur) var(--msu-ease),
+                    border-color var(--msu-dur) var(--msu-ease),
+                    color var(--msu-dur) var(--msu-ease),
+                    box-shadow var(--msu-dur) var(--msu-ease),
+                    transform var(--msu-dur-fast) var(--msu-ease);
+
+        &:not(.btn-link):not(:disabled):not(.disabled) {
+            &:hover {
+                transform: translateY(-1px);
+                box-shadow: var(--msu-shadow-1);
+            }
+            &:active {
+                transform: translateY(0) scale(.985);
+                box-shadow: none;
+            }
+        }
+
+        // Minimalist focus — border/background only, no glow (Enterprise) ----
+        &:focus-visible {
+            outline: none;
+            box-shadow: none;
+        }
+
+        // Consistent disabled treatment -------------------------------------
+        &:disabled,
+        &.disabled {
+            opacity: .55;
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+        }
+    }
+
+    // Primary — reinforce brand accent + colored elevation on hover ---------
+    .btn-primary {
+        --msu-btn-shadow: rgba(var(--msu-accent-rgb), .35);
+        &:not(:disabled):hover {
+            box-shadow: 0 4px 12px var(--msu-btn-shadow);
+        }
+    }
+
+    // Contextual focus: no glow rings ----------------------------------------
+    .btn-success:focus-visible,
+    .btn-danger:focus-visible,
+    .btn-warning:focus-visible,
+    .btn-info:focus-visible,
+    .btn-secondary:focus-visible {
+        outline: none;
+        box-shadow: none;
+    }
+
+    // Icon-only round buttons get a perfect circle + hover surface ----------
+    .btn.o_form_button_edit,
+    .btn.rounded-circle {
+        border-radius: 999px;
+    }
+}
+
+// ----------------------------------------------------------------------------
+// Enterprise brand color on primary buttons/links.
+// NOTE: Odoo compiles its button color map from `$o-brand-primary` at the point
+// its own variables load, i.e. BEFORE our variable override. So re-declaring the
+// SCSS variable is not enough — we apply the Enterprise mauve explicitly here
+// (both via Bootstrap's --bs-btn-* custom props AND direct properties for full
+// coverage across Bootstrap versions).
+// ----------------------------------------------------------------------------
+.o_web_client {
+    .btn-primary {
+        --bs-btn-bg: #714B67;
+        --bs-btn-border-color: #714B67;
+        --bs-btn-hover-bg: #5e3e56;
+        --bs-btn-hover-border-color: #543848;
+        --bs-btn-active-bg: #4c3245;
+        --bs-btn-active-border-color: #4c3245;
+        --bs-btn-disabled-bg: #714B67;
+        --bs-btn-disabled-border-color: #714B67;
+
+        background-color: #714B67;
+        border-color: #714B67;
+        color: #fff;
+
+        &:hover {
+            background-color: #5e3e56;
+            border-color: #543848;
+            color: #fff;
+        }
+        &:focus,
+        &:focus-visible {
+            background-color: #5e3e56;
+            border-color: #543848;
+        }
+        &:active,
+        &.active,
+        &:active:focus,
+        .show > &.dropdown-toggle {
+            background-color: #4c3245 !important;
+            border-color: #4c3245 !important;
+            color: #fff;
+        }
+    }
+
+    // Brand-colored text / links / accents ----------------------------------
+    .text-primary { color: #714B67 !important; }
+    a:not(.btn):not(.dropdown-item):not(.nav-link),
+    .o_form_uri {
+        color: #6a4661;
+        &:hover { color: #4c3245; }
+    }
+    .bg-primary { background-color: #714B67 !important; }
+}

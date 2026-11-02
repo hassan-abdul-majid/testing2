@@ -1,0 +1,90 @@
+.o_main_navbar .o_menu_systray {
+    .o-dropdown > button,
+    .o_menu_systray_item > button,
+    button.dropdown-toggle {
+        &:hover,
+        &:focus,
+        &.show {
+            background-color: #323644 !important;
+        }
+    }
+}
+
+.o-mail-MessagingMenu {
+    .o-mail-MessagingMenu-headerFilter {
+        &.o-active {
+            color: var(--msu-action) !important;
+            background: rgba(var(--msu-action-rgb), .18) !important;
+            border-color: var(--msu-action) !important;
+        }
+
+        &:hover:not(.o-active) {
+            background: #323644 !important;
+            color: var(--msu-text) !important;
+        }
+    }
+}
+
+.o-mail-MessagingMenu:has(.o_msu_inbox_rail) {
+    background: var(--msu-surface);
+
+    .o_msu_inbox_rail {
+        background: var(--msu-surface);
+        border-right-color: var(--msu-border);
+    }
+
+    .o-mail-NotificationItem {
+        &:hover,
+        &.o-active {
+            background: var(--msu-surface-2) !important;
+        }
+    }
+}
+
+.o_msu_inbox_rail_item {
+    color: var(--msu-text-muted);
+
+    &:hover {
+        color: var(--msu-text);
+        background: var(--msu-surface-2);
+    }
+
+    &.o-active .o_msu_inbox_rail_label {
+        color: var(--msu-text);
+    }
+}
+
+.o_msu_inbox_rail_badge {
+    box-shadow: 0 0 0 2px var(--msu-surface);
+}
+
+.o_msu_inbox_search {
+    background: var(--msu-surface);
+    border-color: var(--msu-border-strong);
+    color: var(--msu-text-muted);
+}
+
+.o_msu_inbox_search_input {
+    color: var(--msu-text);
+}
+
+.o_msu_inbox_chip {
+    background: var(--msu-surface);
+    border-color: var(--msu-border-strong);
+    color: var(--msu-text);
+
+    &:hover:not(.o-active) {
+        background: #323644;
+        color: var(--msu-text);
+    }
+
+    &.o-active {
+        color: var(--msu-action);
+        background: rgba(var(--msu-action-rgb), .18);
+        border-color: var(--msu-action);
+    }
+}
+
+.o-mail-DiscussSidebarQuickSearchInput {
+    outline-color: var(--msu-border) !important;
+}

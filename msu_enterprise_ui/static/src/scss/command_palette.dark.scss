@@ -1,0 +1,14 @@
+// Dark-mode command palette — tokens already flip in theme.dark.scss.
+.o_command_palette {
+    background: var(--msu-surface);
+
+    .o_command.focused {
+        background: rgba(var(--msu-accent-rgb), .16);
+    }
+
+    kbd {
+        background: var(--msu-surface-2);
+        border-color: var(--msu-border-strong);
+        color: var(--msu-text);
+    }
+}

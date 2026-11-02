@@ -1,0 +1,210 @@
+// ============================================================================
+// MSU Enterprise UI — Home Menu (Enterprise-aligned)
+// Background: home_menu_background.scss | Dark icons: home_menu.dark.scss
+// ============================================================================
+
+.o_home_menu_background {
+    // Transparent navbar over the gradient (shared with Enterprise login screen)
+    &:not(.o_home_menu_background_custom):not(.o_in_studio) .o_main_navbar {
+        background: transparent !important;
+        border-bottom-color: transparent;
+        box-shadow: none;
+
+        .o_dropdown_active,
+        > ul > li.show > a {
+            outline: none;
+        }
+    }
+
+    &.o_home_menu_background_custom .o_home_menu {
+        background: {
+            size: cover;
+            repeat: no-repeat;
+            position: center;
+        }
+    }
+
+    .o_menu_systray {
+        @include print-variable(o-navbar-badge-bg, $o-navbar-badge-bg);
+    }
+}
+
+.o_home_menu {
+    font-size: $o-home-menu-font-size-base;
+
+    .container {
+        @include media-breakpoint-up(md) {
+            max-width: $o-home-menu-container-size !important;
+        }
+    }
+
+    .o_apps {
+        row-gap: 12px;
+        animation: msu-home-in var(--msu-dur-slow, .32s) var(--msu-ease, ease);
+    }
+
+    .o_draggable {
+        animation: msu-home-app-in var(--msu-dur-slow, .32s) var(--msu-ease, ease) both;
+
+        @for $i from 1 through 36 {
+            &:nth-child(#{$i}) {
+                animation-delay: #{($i - 1) * 16}ms;
+            }
+        }
+    }
+
+    .o_app {
+        text-decoration: none;
+        transition: background-color var(--msu-dur-fast) var(--msu-ease);
+
+        .o_app_icon {
+            width: $o-home-menu-app-icon-max-width;
+            max-width: $o-home-menu-app-icon-max-width;
+            aspect-ratio: 1;
+            padding: $o-home-menu-app-icon-padding;
+            background-color: var(--AppSwitcherIcon-background, #{$o-home-menu-app-icon-background-color});
+            object-fit: cover;
+            overflow: hidden;
+            border-radius: $o-home-menu-app-icon-radius !important;
+            transform-origin: center bottom;
+            transition: box-shadow var(--msu-dur) var(--msu-ease),
+                        transform var(--msu-dur) var(--msu-ease);
+            box-shadow: var(--AppSwitcherIcon-inset-shadow, inset 0 0 0 1px rgba(0, 0, 0, .2)),
+                0 1px 1px rgba(#000, .02),
+                0 2px 2px rgba(#000, .02),
+                0 4px 4px rgba(#000, .02),
+                0 8px 8px rgba(#000, .02),
+                0 16px 16px rgba(#000, .02);
+
+            .fa,
+            .oi {
+                font-size: $o-home-menu-app-icon-max-width * .5;
+            }
+        }
+
+        &:hover .o_app_icon {
+            box-shadow: var(--AppSwitcherIcon-inset-shadow, inset 0 0 0 1px rgba(0, 0, 0, .2)),
+                0 2px 2px rgba(#000, .03),
+                0 4px 4px rgba(#000, .03),
+                0 8px 8px rgba(#000, .03),
+                0 12px 12px rgba(#000, .03),
+                0 24px 24px rgba(#000, .03);
+            transform: translateY(-3px);
+        }
+
+        &:hover .o_caption {
+            opacity: 1;
+        }
+
+        &:active .o_app_icon {
+            transform: translateY(-1px) scale(.98);
+            transition: none;
+        }
+
+        .o_caption {
+            color: var(--homeMenuCaption-color, #{$o-home-menu-caption-color});
+            text-shadow: $o-home-menu-caption-shadow;
+            font-weight: 500;
+            font-size: .8125rem;
+            letter-spacing: .01em;
+            line-height: 1.3;
+            opacity: .88;
+            transition: opacity var(--msu-dur-fast) var(--msu-ease);
+        }
+
+        &.o_focused {
+            background: rgba(var(--msu-accent-rgb), .1);
+            outline: none;
+            box-shadow: inset 0 0 0 1.5px rgba(var(--msu-accent-rgb), .45);
+            border-radius: var(--msu-radius);
+        }
+    }
+
+    .o_dragged_app {
+        transition: transform .5s;
+        transform: rotate(6deg);
+
+        .o_app_icon {
+            box-shadow: 0 8px 15px -10px black;
+            transform: translateY(-1px);
+        }
+    }
+
+    .o_no_result {
+        margin-top: 5rem;
+        text-align: center;
+        color: var(--homeMenuCaption-color, #{$o-home-menu-caption-color});
+
+        .o_no_result_title {
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+        .o_no_result_hint {
+            margin-top: .4rem;
+            font-weight: 400;
+            font-size: .85rem;
+            opacity: .65;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        &.o_ios_app {
+            .o_apps {
+                flex-direction: column;
+                font-size: $o-home-menu-font-size-base * 1.25;
+                margin-top: map-get($spacers, 1);
+                padding: 0 map-get($spacers, 2);
+
+                > *, .o_app {
+                    width: 100%;
+                }
+            }
+
+            .o_app {
+                flex-direction: row !important;
+                justify-content: initial !important;
+                background-color: rgba(255, 255, 255, .1);
+                padding: map-get($spacers, 3) map-get($spacers, 4) !important;
+            }
+
+            .o_app_icon {
+                width: $o-home-menu-app-icon-max-width * .75;
+                height: $o-home-menu-app-icon-max-width * .75;
+                margin-right: map-get($spacers, 4);
+            }
+
+            .o_caption {
+                text-align: start !important;
+            }
+        }
+
+        &:not(.o_ios_app) .o_caption {
+            font-size: $font-size-sm;
+            font-weight: 500;
+        }
+    }
+}
+
+.o_home_menu_background_custom {
+    .o_home_menu .o_app .o_caption {
+        color: $o-home-menu-custom-caption-color;
+        text-shadow: $o-home-menu-custom-caption-shadow;
+    }
+}
+
+@keyframes msu-home-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes msu-home-app-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .o_home_menu .o_apps,
+    .o_home_menu .o_draggable {
+        animation: none;
+    }
+}

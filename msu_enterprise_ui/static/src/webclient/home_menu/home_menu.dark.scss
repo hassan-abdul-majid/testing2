@@ -1,0 +1,39 @@
+// ============================================================================
+// MSU Enterprise UI — Home Menu dark mode (Enterprise pattern)
+// Glass icon tiles + white captions/navbar on gradient background.
+// ============================================================================
+
+.o_home_menu_background {
+    --homeMenuCaption-color: #{$o-black};
+
+    .o_app_icon {
+        --AppSwitcherIcon-background: #{rgba(#fff, .05)};
+        --AppSwitcherIcon-inset-shadow: #{inset 0 0 0 1px rgba(#fff, .1)};
+        --AppSwitcherIcon-border-color: transparent;
+    }
+
+    .o_app:hover .o_app_icon {
+        --AppSwitcherIcon-inset-shadow: #{inset 0 0 0 1px rgba(#fff, .2)};
+    }
+
+    // Navbar over dark gradient — light systray text/icons (Enterprise)
+    &:not(.o_home_menu_background_custom):not(.o_in_studio) .o_main_navbar {
+        --NavBar-menuToggle-color: #{$o-black};
+        --NavBar-entry-color: #{$o-gray-900};
+        --NavBar-entry-color--hover: #{$o-black};
+        --NavBar-brand-color: #{$o-gray-900};
+
+        .o_menu_systray {
+            .dropdown-toggle,
+            .o_nav_entry,
+            button,
+            a {
+                color: #{$o-gray-900} !important;
+            }
+
+            .badge {
+                box-shadow: 0 0 0 2px transparent;
+            }
+        }
+    }
+}

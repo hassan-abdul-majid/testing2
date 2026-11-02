@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="view_receipts_form_field" model="ir.ui.view">
+
+        <field name="name">stock.picking.form.inherit.demo.field</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+
+        <field name="arch" type="xml">
+
+           
+            <xpath expr="//sheet/group/group/field[@name='picking_type_id']"
+                   position="after">
+                   
+
+                <field name="hassan_field"
+                       invisible="picking_type_code != 'incoming'"/>
+
+            </xpath>
+
+           
+            <xpath expr="//sheet/notebook" position="inside">
+
+                <page string="Note Book">
+
+                    <group>
+                        <field name="personal_name"/>
+                        <field name="personal_email"/>
+                        <field name="personal_phone"/>
+                    </group>
+
+                </page>
+
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,102 @@
+// ============================================================================
+// Pastel status badges (list, kanban, forms) — all modules
+// Solid white-on-color pills become tinted pills with matching dark text.
+// Systray / Discuss unread counters are left alone.
+// ============================================================================
+
+.o_web_client {
+
+    .o_list_view .badge,
+    .o_kanban_record .badge,
+    .o_field_badge .badge,
+    .o_field_widget.o_field_label_selection .badge,
+    .o_field_label_selection .badge {
+        border-radius: 999px !important;
+        font-weight: 600;
+        font-size: 0.78rem;
+        letter-spacing: .01em;
+        padding: 0.32em 0.8em;
+        border: 0 !important;
+        box-shadow: none !important;
+        line-height: 1.35;
+
+        &.text-bg-success,
+        &.bg-success {
+            background-color: #d8f3e4 !important;
+            color: #1b7a4c !important;
+        }
+
+        &.text-bg-danger,
+        &.bg-danger {
+            background-color: #fde4e6 !important;
+            color: #b42318 !important;
+        }
+
+        &.text-bg-info,
+        &.bg-info {
+            background-color: #d7eef6 !important;
+            color: #0e7490 !important;
+        }
+
+        &.text-bg-warning,
+        &.bg-warning {
+            background-color: #fde8d2 !important;
+            color: #b45309 !important;
+        }
+
+        &.text-bg-primary,
+        &.bg-primary {
+            background-color: #eadff0 !important;
+            color: #5c3d5a !important;
+        }
+
+        &.text-bg-secondary,
+        &.text-bg-default,
+        &.text-bg-300,
+        &.text-bg-muted,
+        &.bg-secondary,
+        &.bg-light,
+        &.bg-300 {
+            background-color: #eceef2 !important;
+            color: #4b5563 !important;
+        }
+    }
+
+    .o_list_view .o_data_row:hover > .o_data_cell {
+        background-color: #f3f7fb;
+    }
+
+    // Purchase KPI strip: pastel tiles instead of solid mauve blocks
+    .o_purchase_dashboard {
+        .btn-primary {
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            box-shadow: none !important;
+            transform: none !important;
+            border: 0 !important;
+
+            &:hover {
+                filter: brightness(.96);
+                transform: none !important;
+            }
+        }
+
+        .g-col-4:nth-child(1) .btn-primary {
+            background: #d7e8f8 !important;
+            color: #1e4e8c !important;
+        }
+        .g-col-4:nth-child(2) .btn-primary {
+            background: #e8eaef !important;
+            color: #4b5563 !important;
+        }
+        .g-col-4:nth-child(3) .btn-primary {
+            background: #fde8d2 !important;
+            color: #9a4a12 !important;
+        }
+
+        .btn-light,
+        .bg-100 {
+            border-radius: 10px !important;
+        }
+    }
+}

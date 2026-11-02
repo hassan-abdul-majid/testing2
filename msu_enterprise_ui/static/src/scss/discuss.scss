@@ -1,0 +1,321 @@
+// ============================================================================
+// Discuss / messaging menu chrome
+// ============================================================================
+
+.o_main_navbar .o_menu_systray {
+    .o-dropdown > button,
+    .o_menu_systray_item > button,
+    .o_nav_entry,
+    button.dropdown-toggle {
+        border-radius: 8px;
+        transition: background-color var(--msu-dur-fast) var(--msu-ease);
+
+        &:hover,
+        &:focus,
+        &.show {
+            background-color: #d8dbe4 !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+    }
+}
+
+.o-mail-MessagingMenu {
+    border-radius: 12px !important;
+    overflow: hidden;
+
+    .o-mail-MessagingMenu-header {
+        padding: 6px 8px 4px;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .o-mail-MessagingMenu-headerFilter {
+        border-radius: 8px !important;
+        padding: 5px 10px !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+
+        &.o-active {
+            color: var(--msu-action) !important;
+            background: rgba(var(--msu-action-rgb), .1) !important;
+            border: 1px solid rgba(var(--msu-action-rgb), .35) !important;
+            font-weight: 600 !important;
+        }
+
+        &:hover:not(.o-active) {
+            background: #eceef2 !important;
+            color: var(--msu-text) !important;
+        }
+    }
+
+    .btn-link:not(.o-mail-MessagingMenu-headerFilter) {
+        color: var(--msu-action) !important;
+    }
+}
+
+// Two-column inbox popover (rail + list), matching the Discuss inbox chrome.
+.o-mail-MessagingMenu:has(.o_msu_inbox_rail) {
+    display: grid !important;
+    grid-template-columns: 88px minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
+    width: 560px;
+    min-height: 440px;
+    max-height: Min(calc(100vh - 64px), 640px);
+    background: var(--msu-surface, #fff);
+    overflow: hidden;
+
+    &:has(.o_msu_inbox_selector) {
+        overflow: visible;
+    }
+
+    .o_msu_inbox_rail {
+        grid-column: 1;
+        grid-row: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 12px 8px;
+        border-right: 1px solid var(--msu-border, #e7e7ee);
+        background: var(--msu-surface, #fff);
+        overflow-y: auto;
+    }
+
+    .o-mail-MessagingMenu-header {
+        display: none !important;
+    }
+
+    .o_msu_inbox_toolbar {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px 8px;
+        min-width: 0;
+    }
+
+    .o_msu_inbox_filters {
+        grid-column: 2;
+        grid-row: 2;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 14px 10px;
+    }
+
+    .o-mail-MessagingMenu-list {
+        grid-column: 2;
+        grid-row: 3;
+        min-height: 0;
+        padding: 4px 10px 12px !important;
+    }
+
+    .o-mail-NotificationItem {
+        border: 0 !important;
+        border-radius: 10px !important;
+        padding: 10px 8px 10px 12px !important;
+        outline: none !important;
+
+        &:hover,
+        &.o-active {
+            background: #f3f5f8 !important;
+        }
+    }
+
+    .o-mail-NotificationItem-unreadIndicator {
+        left: auto !important;
+        right: 10px;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        color: #9aa0ae;
+        font-size: .45rem;
+    }
+}
+
+.o_msu_inbox_rail_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    border: 0;
+    background: transparent;
+    color: var(--msu-text-muted, #6b7280);
+    padding: 6px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    line-height: 1.1;
+
+    &:hover {
+        color: var(--msu-text, #2b2f3a);
+        background: #f3f5f8;
+    }
+
+    &.o-active {
+        color: var(--msu-action, #017e84);
+        background: transparent;
+
+        .o_msu_inbox_rail_icon {
+            background: rgba(var(--msu-action-rgb), .14);
+            color: var(--msu-action, #017e84);
+        }
+
+        .o_msu_inbox_rail_label {
+            color: var(--msu-text, #2b2f3a);
+            font-weight: 600;
+        }
+    }
+}
+
+.o_msu_inbox_rail_icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 28px;
+    border-radius: 999px;
+    font-size: 1.05rem;
+    color: inherit;
+}
+
+.o_msu_inbox_rail_label {
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+    max-width: 72px;
+    line-height: 1.15;
+}
+
+.o_msu_inbox_rail_badge {
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: #e13d3d;
+    color: #fff !important;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 16px;
+    text-align: center;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.o_msu_inbox_new {
+    flex: 0 0 auto;
+    border: 0;
+    border-radius: 10px;
+    background: #9b6d8c;
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    padding: 9px 14px;
+    white-space: nowrap;
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+        background: #8a5f7c;
+        color: #fff;
+    }
+}
+
+.o_msu_inbox_search {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    height: 36px;
+    padding: 0 14px;
+    border: 1px solid var(--msu-border-strong, #d7d8e3);
+    border-radius: 999px;
+    background: var(--msu-surface, #fff);
+    color: var(--msu-text-muted, #6b7280);
+    cursor: text;
+
+    .oi {
+        font-size: 13px;
+        opacity: .7;
+    }
+}
+
+.o_msu_inbox_search_input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    box-shadow: none;
+    font-size: 13px;
+    color: var(--msu-text, #2b2f3a);
+
+    &::placeholder {
+        color: var(--msu-text-muted, #6b7280);
+    }
+}
+
+.o_msu_inbox_selector {
+    min-width: 0;
+}
+
+.o_msu_inbox_chip {
+    border: 1px solid var(--msu-border-strong, #d7d8e3);
+    border-radius: 999px;
+    background: var(--msu-surface, #fff);
+    color: var(--msu-text, #2b2f3a);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 6px 14px;
+    cursor: pointer;
+
+    &:hover:not(.o-active) {
+        background: #eceef2;
+    }
+
+    &.o-active {
+        color: var(--msu-action, #017e84);
+        background: rgba(var(--msu-action-rgb), .12);
+        border-color: var(--msu-action, #017e84);
+        font-weight: 600;
+    }
+}
+
+.o-mail-NotificationItem-avatarContainer {
+    border-radius: 10px !important;
+    overflow: visible !important;
+
+    img,
+    .o_object_fit_cover,
+    .o_avatar {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+}
+
+.o-mail-DiscussSidebarQuickSearchInput {
+    border-radius: 999px !important;
+    overflow: hidden;
+    outline: 1px solid var(--msu-border) !important;
+
+    input.form-control {
+        border-radius: 999px !important;
+        background: transparent;
+    }
+}
+
+.o-mail-DiscussSidebarCategory-actions .btn-primary,
+.o-mail-DiscussSidebarCategory-actions .btn.btn-secondary {
+    border-radius: 8px;
+}
+
+.o-mail-Discuss-headerActionsGroup {
+    border-radius: 10px !important;
+    overflow: hidden;
+}

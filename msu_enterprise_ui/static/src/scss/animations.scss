@@ -1,0 +1,212 @@
+// ============================================================================
+// MSU Enterprise UI — Motion library
+// ----------------------------------------------------------------------------
+// Shared keyframes + a lightweight click "ripple" used across the theme.
+// Motion is intentionally subtle and fully disabled under reduced-motion.
+// ============================================================================
+
+// -- Views: layered reveal (blur → sharp, toolbar, then body) ----------------
+// Odoo remounts `.o_action` on every menu click, record open, and palette
+// jump (`t-key="info.id"`). Home menu keeps its own entrance. No motion on
+// the command-palette dialog (that jump is handled separately).
+.o_action_manager > .o_action:not(:has(.o_home_menu)):not(:has(.o_ages_ent_dashboard)),
+.o_dialog .o_action:not(:has(.o_ages_ent_dashboard)) {
+    --msu-view-ease: cubic-bezier(.16, 1, .3, 1);
+    animation: msu-view-in .52s var(--msu-view-ease);
+    transform-origin: top left;
+    width: 100%;
+    left: 0;
+
+    > .o_control_panel {
+        animation: msu-view-bar-in .4s var(--msu-view-ease);
+    }
+
+    .o_form_sheet,
+    .o_kanban_renderer {
+        animation: msu-view-body-in .55s var(--msu-view-ease) .05s both;
+        transform-origin: top left;
+    }
+}
+
+// Primary list only (not One2many lists inside a form). Sliding the whole
+// table is expensive and feels laggy — fade the page and only move the
+// toolbar (small DOM).
+.o_action_manager > .o_action:has(.o_list_view):not(:has(.o_form_view)),
+.o_dialog .o_action:has(.o_list_view):not(:has(.o_form_view)) {
+    animation: msu-view-fade-in .3s var(--msu-view-ease);
+    transform: none !important;
+    filter: none !important;
+
+    > .o_control_panel {
+        animation: msu-view-bar-in .32s var(--msu-view-ease);
+    }
+
+    .o_content {
+        scrollbar-gutter: stable;
+    }
+
+    .o_list_renderer {
+        animation: none;
+        transform: none !important;
+        filter: none !important;
+    }
+}
+
+@keyframes msu-view-in {
+    0% {
+        opacity: 0;
+        filter: blur(8px);
+        transform: translateY(16px);
+    }
+    50% {
+        opacity: 1;
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes msu-view-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes msu-view-bar-in {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes msu-view-body-in {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .o_action_manager > .o_action:not(:has(.o_home_menu)),
+    .o_dialog .o_action,
+    .o_action_manager > .o_action:not(:has(.o_home_menu)) > .o_control_panel,
+    .o_dialog .o_action > .o_control_panel,
+    .o_action_manager > .o_action:not(:has(.o_home_menu)) .o_form_sheet,
+    .o_action_manager > .o_action:not(:has(.o_home_menu)) .o_list_renderer,
+    .o_action_manager > .o_action:not(:has(.o_home_menu)) .o_kanban_renderer,
+    .o_dialog .o_action .o_form_sheet,
+    .o_dialog .o_action .o_list_renderer,
+    .o_dialog .o_action .o_kanban_renderer {
+        animation: none;
+    }
+}
+
+// -- Dialogs / modals: gentle scale + fade -----------------------------------
+.o_web_client .modal.o_technical_modal:not(:has(.o_command_palette)) .modal-dialog,
+.o_dialog:not(:has(.o_command_palette)) .modal-dialog {
+    animation: msu-modal-in var(--msu-dur) var(--msu-ease);
+}
+
+// Command palette: fade the overlay and nudge the box a few pixels.
+// Do not transform/scale `.modal-dialog` — that recenters the overlay and
+// jumps the palette sideways when `body.modal-open` hides the scrollbar.
+.o_dialog:has(.o_command_palette) {
+    animation: msu-palette-fade-in var(--msu-dur) var(--msu-ease);
+
+    .modal {
+        overflow: hidden;
+        padding-right: 0 !important;
+    }
+    .modal-dialog {
+        animation: none !important;
+        transform: none !important;
+    }
+    .modal-content.o_command_palette {
+        animation: msu-palette-content-in var(--msu-dur) var(--msu-ease);
+    }
+
+    &.msu-palette-closing {
+        pointer-events: none;
+        animation: msu-palette-fade-out var(--msu-dur) var(--msu-ease) forwards;
+
+        .modal-content.o_command_palette {
+            animation: msu-palette-content-out var(--msu-dur) var(--msu-ease) forwards;
+        }
+    }
+}
+
+@keyframes msu-palette-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes msu-palette-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes msu-palette-content-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes msu-palette-content-out {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes msu-modal-in {
+    from { opacity: 0; transform: translateY(10px) scale(.985); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+// -- Slide-in for side panels (search panel, settings, chatter) --------------
+.o_web_client .o_search_panel,
+.o_web_client .o-mail-ChatWindow {
+    animation: msu-slide-in-left var(--msu-dur-slow) var(--msu-ease);
+}
+
+@keyframes msu-slide-in-left {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+// -- Ripple on buttons only (not navbar toggles — overflow:hidden hid labels) -
+.o_web_client .btn-primary:not(.o_arrow_button),
+.o_web_client .btn-secondary:not(.o_arrow_button) {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center,
+                    rgba(255, 255, 255, .45) 0%,
+                    rgba(255, 255, 255, 0) 60%);
+        opacity: 0;
+        transform: scale(0);
+        transition: transform var(--msu-dur-slow) var(--msu-ease),
+                    opacity var(--msu-dur-slow) var(--msu-ease);
+        pointer-events: none;
+    }
+    &:active::before {
+        opacity: 1;
+        transform: scale(1);
+        transition: none;
+    }
+}
+
+// -- Skeleton shimmer utility (opt-in via `.msu-skeleton`) -------------------
+.msu-skeleton {
+    background: linear-gradient(90deg,
+                var(--msu-surface-2) 25%,
+                #eef0f6 37%,
+                var(--msu-surface-2) 63%);
+    background-size: 400% 100%;
+    animation: msu-shimmer 1.4s ease infinite;
+    border-radius: var(--msu-radius-sm);
+}
+
+@keyframes msu-shimmer {
+    0%   { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}

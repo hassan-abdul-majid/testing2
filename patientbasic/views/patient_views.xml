@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!-- ===================================================== -->
+    <!-- 1. LIST VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="patient_basic_view_list" model="ir.ui.view">
+
+        <field name="name">patient.basic.list</field>
+
+        <field name="model">patient.basic</field>
+
+        <field name="arch" type="xml">
+        
+
+            <list>
+
+                <field name="patient_id"/>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="blood_group"/>
+                <field name="phone"/>
+                <field name="status"/>
+                <field name="visit_fee"/>
+
+            </list>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- 2. FORM VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="patient_basic_view_form" model="ir.ui.view">
+
+        <field name="name">patient.basic.form</field>
+
+        <field name="model">patient.basic</field>
+
+        <field name="arch" type="xml">
+
+            <form>
+
+                <header>
+                    <button
+                        name="action_approve"
+                        string="Approve"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved"/>
+                </header>
+
+                <sheet>
+
+                    <!-- Patient Name -->
+
+                    <div class="oe_title">
+
+                        <label for="name" string="Patient Name"/>
+
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+
+                    </div>
+
+
+                    <!-- Tabs -->
+
+                    <notebook>
+
+
+                        <!-- Personal Information -->
+
+                        <page string="Personal Information">
+
+                            <group>
+
+                                <group>
+
+                                    <field name="patient_id"/>
+                                    <field name="age"/>
+                                    <field name="dob"/>
+                                    <field name="gender"/>
+
+                                </group>
+
+
+                                <group>
+
+                                    <field name="phone"/>
+                                    <field name="blood_group"/>
+                                    <field name="status"/>
+
+                                </group>
+
+                            </group>
+
+                        </page>
+
+
+                        <!-- Visit Information -->
+
+                        <page string="Visit Information">
+
+                            <group>
+
+                                <field name="visit_fee"/>
+
+                            </group>
+
+                        </page>
+
+
+                        <!-- Notes -->
+
+                        <page string="Notes">
+
+                            <group>
+
+                                <field name="notes"/>
+
+                            </group>
+
+                        </page>
+
+
+                    </notebook>
+
+                </sheet>
+
+            </form>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- 3. SEARCH VIEW -->
+    <!-- ===================================================== -->
+
+    <record id="patient_basic_view_search" model="ir.ui.view">
+
+        <field name="name">patient.basic.search</field>
+
+        <field name="model">patient.basic</field>
+
+        <field name="arch" type="xml">
+
+            <search>
+
+                <!-- Search Fields -->
+
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="phone"/>
+
+
+                <!-- Custom Filters -->
+
+                <filter
+                    name="filter_male"
+                    string="Male"
+                    domain="[('gender', '=', 'male')]"
+                />
+
+                <filter
+                    name="filter_female"
+                    string="Female"
+                    domain="[('gender', '=', 'female')]"
+                />
+
+                <filter
+                    name="filter_admitted"
+                    string="Admitted"
+                    domain="[('status', '=', 'admitted')]"
+                />
+
+                <filter
+                    name="filter_discharged"
+                    string="Discharged"
+                    domain="[('status', '=', 'discharged')]"
+                />
+
+
+                <!-- Group By -->
+
+                <group string="Group By">
+
+                    <filter
+                        name="group_gender"
+                        string="Gender"
+                        context="{'group_by': 'gender'}"
+                    />
+
+                    <filter
+                        name="group_blood_group"
+                        string="Blood Group"
+                        context="{'group_by': 'blood_group'}"
+                    />
+
+                    <filter
+                        name="group_status"
+                        string="Status"
+                        context="{'group_by': 'status'}"
+                    />
+
+                </group>
+
+            </search>
+
+        </field>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- 4. ACTION -->
+    <!-- ===================================================== -->
+
+    <record id="patient_basic_action" model="ir.actions.act_window">
+
+        <field name="name">Patients</field>
+
+        <field name="res_model">patient.basic</field>
+
+        <field name="view_mode">list,form</field>
+
+        <field name="search_view_id"
+               ref="patient_basic_view_search"/>
+
+    </record>
+
+
+    <!-- ===================================================== -->
+    <!-- 5. ROOT MENU -->
+    <!-- ===================================================== -->
+
+    <menuitem
+        id="patient_basic_menu_root"
+        name="Patients"
+        sequence="10"
+        web_icon="patientbasic,static/description/hospital.png"
+    />
+
+
+    <!-- ===================================================== -->
+    <!-- 6. PATIENTS MENU -->
+    <!-- ===================================================== -->
+
+    <menuitem
+        id="patient_basic_menu_patients"
+        name="Patients"
+        parent="patient_basic_menu_root"
+        action="patient_basic_action"
+        sequence="10"
+    />
+
+</odoo>

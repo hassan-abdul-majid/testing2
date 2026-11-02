@@ -1,0 +1,122 @@
+// ============================================================================
+// MSU Enterprise UI — Navbar (top header)
+// ----------------------------------------------------------------------------
+// Follows web_enterprise/navbar.scss + core navbar.scss layout. We do NOT
+// reposition the app icon or brand — core handles the Enterprise morphing
+// toggle, flex heights, and hover animation. We only set CSS variables and
+// minor polish (contain icon, systray alignment, readable colors).
+// ============================================================================
+
+.o_main_navbar {
+    // Same runtime variables as Enterprise navbar.scss -----------------------
+    --NavBar-entry-color--active: #{$o-component-active-color};
+    --NavBar-entry-borderColor-active: #{$o-component-active-border};
+    --NavBar-entry-backgroundColor--active: #{$o-component-active-bg};
+    --NavBar-entry-backgroundColor--hover: #{$o-gray-200};
+    --NavBar-entry-backgroundColor--focus: #{$o-gray-200};
+    --NavBar-entry-color: #{$o-gray-800};
+    --NavBar-entry-color--hover: #{$o-gray-900};
+    --NavBar-brand-color: #{$o-gray-700};
+    --NavBar-menuToggle-color: #{$o-enterprise-color};
+    --Dropdown_menu-margin-y: #{map-get($spacers, 1)};
+
+    .o_menu_toggle {
+        color: var(--NavBar-menuToggle-color, #{$o-brand-odoo});
+    }
+}
+
+// Superuser systray — prevent Design menu compression (Enterprise)
+body.o_is_superuser .o_menu_systray {
+    border-image-outset: map-get($border-widths, 5);
+}
+
+// MSU polish layer (alignment, shadows) --------------------------------------
+.o_main_navbar {
+    align-items: center;
+    background: $o-navbar-background !important;
+    box-shadow: var(--msu-shadow-1);
+
+    // Menu toggle (grid / back / app brand) — let core own layout ------------
+    .o_menu_toggle {
+        color: var(--NavBar-menuToggle-color);
+        align-items: center;
+
+        .o_menu_toggle_icon {
+            flex-shrink: 0;
+        }
+
+        .o_menu_brand {
+            font-weight: normal;
+            align-items: center;
+        }
+
+        @include media-breakpoint-up(md) {
+            .o_menu_brand_icon {
+                object-fit: contain;
+                object-position: center;
+            }
+        }
+    }
+
+    // Section menus — same weight/height as Enterprise (fw-normal in XML) ----
+    .o_menu_sections {
+        align-items: center;
+
+        .o_nav_entry,
+        .dropdown-toggle {
+            font-weight: normal;
+            color: var(--NavBar-entry-color, #{$o-gray-800}) !important;
+            border-radius: var(--msu-radius-sm);
+            outline: none !important;
+            box-shadow: none !important;
+            transition: background-color var(--msu-dur-fast) var(--msu-ease),
+                        border-color var(--msu-dur-fast) var(--msu-ease),
+                        color var(--msu-dur-fast) var(--msu-ease);
+
+            &:focus,
+            &:focus-visible {
+                outline: none !important;
+                box-shadow: none !important;
+            }
+
+            &:active,
+            &.show {
+                border-color: var(--NavBar-entry-borderColor-active) !important;
+                background: var(--NavBar-entry-backgroundColor--active) !important;
+                outline: none !important;
+                box-shadow: none !important;
+            }
+        }
+    }
+
+    // Systray — vertically centred cluster -----------------------------------
+    .o_menu_systray {
+        align-items: center;
+
+        > div,
+        > .o-dropdown,
+        .o_menu_systray_item {
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-toggle,
+        button,
+        a {
+            display: flex;
+            align-items: center;
+            color: var(--NavBar-entry-color, #{$o-gray-800}) !important;
+
+            &:focus:not(:focus-visible) {
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        .badge {
+            border-radius: 999px;
+            font-weight: 600;
+            box-shadow: 0 0 0 2px $o-white;
+        }
+    }
+}

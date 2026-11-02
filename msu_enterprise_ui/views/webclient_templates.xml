@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="webclient_login" inherit_id="web.login_layout">
+        <xpath expr="//t[@t-call='web.frontend_layout']/t[last()]" position="after">
+            <t t-set="body_classname" t-value="'o_home_menu_background'"/>
+            <t t-set="login_card_classes" t-value="'rounded-4 shadow bg-white'"/>
+        </xpath>
+    </template>
+
+    <template id="webclient_bootstrap" inherit_id="web.webclient_bootstrap">
+        <xpath expr="//meta[@name='theme-color']" position="replace">
+            <meta name="theme-color" t-att-content="'#242733' if request.cookies.get('color_scheme') == 'dark' else '#714B67'"/>
+        </xpath>
+        <xpath expr="//script[contains(., 'odoo.__session_info__')]" position="after">
+            <script type="text/javascript">
+                (function () {
+                    var info = odoo.__session_info__ || {};
+                    var preference = info.color_scheme_preference || 'system';
+                    if (preference !== 'system') {
+                        return;
+                    }
+                    var scheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    var cookies = document.cookie.split(';').map(function (c) { return c.trim(); });
+                    var current = cookies.find(function (c) { return c.indexOf('color_scheme=') === 0; });
+                    var currentValue = current ? current.split('=')[1] : null;
+                    if (currentValue !== scheme) {
+                        document.cookie = 'color_scheme=' + scheme + '; path=/; max-age=' + (60 * 60 * 24 * 365);
+                        window.location.reload();
+                    }
+                })();
+            </script>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="msu_enterprise_ui.LoadingIndicator" t-inherit="web.LoadingIndicator" t-inherit-mode="extension">
+        <xpath expr="//span[hasclass('o_loading_indicator')]" position="replace">
+            <span class="o_loading_indicator" t-att-class="transition.className">
+                <span class="o_loading_spinner" aria-hidden="true"/>
+                <span class="o_loading_text">Loading...</span>
+            </span>
+        </xpath>
+    </t>
+</templates>

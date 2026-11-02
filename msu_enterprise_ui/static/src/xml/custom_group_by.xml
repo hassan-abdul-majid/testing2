@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- Replace the native <select>: opening it auto-applies the first field. -->
+    <t t-name="msu_enterprise_ui.CustomGroupByItem">
+        <Dropdown menuClass="'o_msu_custom_group_menu'" position="'right-start'">
+            <button type="button" class="o_add_custom_group_menu">
+                <t t-esc="msuAddCustomGroupLabel"/>
+            </button>
+            <t t-set-slot="content">
+                <DropdownItem t-foreach="msuGroupByFields" t-as="field" t-key="field.name"
+                    class="'o_menu_item text-truncate'"
+                    onSelected="() => this.onMsuAddCustomGroup(field.name)">
+                    <t t-esc="field.string"/>
+                </DropdownItem>
+            </t>
+        </Dropdown>
+    </t>
+</templates>

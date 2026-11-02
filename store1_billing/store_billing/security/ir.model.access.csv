@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_store_bill_user,store.bill.user,model_store_bill,base.group_user,1,1,1,1
+access_store_bill_line_user,store.bill.line.user,model_store_bill_line,base.group_user,1,1,1,1

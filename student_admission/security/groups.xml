@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<record id="group_admission_user" model="res.groups">
+    <field name="name">Admission Employee</field>
+    </record>
+
+    <record id="group_admission_manager" model="res.groups">
+
+        <field name="name">Admission Manager</field>
+        <field name="implied_ids"
+         eval="[(4, ref('student_admission.group_admission_user'))]"
+        
+        />
+    </record>
+
+
+
+
+
+
+</odoo>

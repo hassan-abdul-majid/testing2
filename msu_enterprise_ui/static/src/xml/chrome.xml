@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- Match the save-section kebab next to the record title. -->
+    <t t-name="web.CogMenu" t-inherit="web.CogMenu" t-inherit-mode="extension">
+        <xpath expr="//i[hasclass('fa-cog')]" position="replace">
+            <i class="fa fa-fw fa-ellipsis-v"/>
+        </xpath>
+    </t>
+</templates>

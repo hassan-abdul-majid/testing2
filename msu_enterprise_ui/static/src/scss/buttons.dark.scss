@@ -1,0 +1,35 @@
+// ============================================================================
+// MSU Enterprise UI — Dark mode button overrides
+// ============================================================================
+
+.o_web_client {
+    .btn-primary {
+        --bs-btn-bg: #{$o-brand-primary};
+        --bs-btn-border-color: #{$o-brand-primary};
+        --bs-btn-color: #{$o-black};
+        --bs-btn-hover-bg: #{lighten($o-brand-primary, 5%)};
+        --bs-btn-hover-border-color: #{lighten($o-brand-primary, 5%)};
+        --bs-btn-hover-color: #{$o-black};
+        --bs-btn-active-bg: #{lighten($o-brand-primary, 10%)};
+        --bs-btn-active-border-color: #{lighten($o-brand-primary, 10%)};
+        --bs-btn-active-color: #{$o-black};
+
+        background-color: #{$o-brand-primary};
+        border-color: #{$o-brand-primary};
+        color: #{$o-black};
+
+        &:hover {
+            background-color: #{lighten($o-brand-primary, 5%)};
+            border-color: #{lighten($o-brand-primary, 5%)};
+            color: #{$o-black};
+        }
+    }
+
+    .text-primary { color: map-get($o-theme-text-colors, 'primary') !important; }
+    a:not(.btn):not(.dropdown-item):not(.nav-link),
+    .o_form_uri {
+        color: #{$o-action};
+        &:hover { color: #{lighten($o-action, 10%)}; }
+    }
+    .bg-primary { background-color: #{$o-brand-primary} !important; }
+}

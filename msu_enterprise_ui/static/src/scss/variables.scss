@@ -1,0 +1,10 @@
+// ============================================================================
+// MSU Enterprise UI — Extra SCSS variable overrides (after Enterprise vars)
+// ============================================================================
+
+$o-border-radius: 6px;
+$o-border-radius-sm: 4px;
+$o-border-radius-lg: 10px;
+
+// Navbar toggle uses brand mauve (Enterprise navbar.variables omits this)
+$o-navbar-menu-toggle-color: $o-enterprise-color;

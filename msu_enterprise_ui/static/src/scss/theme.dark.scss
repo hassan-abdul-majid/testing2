@@ -1,0 +1,36 @@
+// ============================================================================
+// MSU Enterprise UI — Dark mode design tokens
+// ============================================================================
+
+:root {
+    --msu-accent:            #b972a6;
+    --msu-accent-rgb:        185, 114, 166;
+    --msu-accent-hover:      #c989b8;
+    --msu-accent-active:     #d4a0c9;
+    --msu-action:            #02c7b5;
+    --msu-action-rgb:        2, 199, 181;
+
+    --msu-surface:           #262A36;
+    --msu-surface-2:         #1B1D26;
+    --msu-border:            #3C3E4B;
+    --msu-border-strong:     #5A5E6B;
+
+    --msu-text:              #E4E4E4;
+    --msu-text-muted:        #B1B3BC;
+
+    --msu-shadow-1:          0 1px 2px rgba(0, 0, 0, .25), 0 1px 3px rgba(0, 0, 0, .2);
+    --msu-shadow-2:          0 4px 8px rgba(0, 0, 0, .28), 0 2px 4px rgba(0, 0, 0, .18);
+    --msu-shadow-3:          0 12px 24px rgba(0, 0, 0, .35), 0 6px 12px rgba(0, 0, 0, .22);
+    --msu-shadow-pop:        0 16px 40px rgba(0, 0, 0, .45), 0 4px 12px rgba(0, 0, 0, .25);
+
+    --msu-success:           #2dd4bf;
+    --msu-warning:           #fbbf24;
+    --msu-danger:            #f87171;
+    --msu-info:              #02c7b5;
+}
+
+.o_web_client {
+    *::-webkit-scrollbar-thumb:hover {
+        background-color: #6B707F;
+    }
+}

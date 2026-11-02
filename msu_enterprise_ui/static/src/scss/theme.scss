@@ -1,0 +1,128 @@
+// ============================================================================
+// MSU Enterprise UI — Design tokens & base theme
+// ----------------------------------------------------------------------------
+// CSS custom properties are used as the single source of truth for the theme
+// so that (a) values can be tweaked in one place and (b) a future dark mode can
+// simply re-declare these under a `.o_dark`/`[data-color-scheme="dark"]` scope.
+// ============================================================================
+
+:root {
+    // Brand / accent — Enterprise mauve (#714B67) so custom accents (nav
+    // indicator, ripple, home-menu focus) match the themed buttons/links.
+    --msu-accent:            #714B67;
+    --msu-accent-rgb:        113, 75, 103;
+    --msu-accent-hover:      #5e3e56;
+    --msu-accent-active:     #4c3245;
+    // Secondary action accent (Enterprise teal)
+    --msu-action:            #017e84;
+    --msu-action-rgb:        1, 126, 132;
+
+    // Surfaces & elevation
+    --msu-surface:           #ffffff;
+    --msu-surface-2:         #f6f7fb;
+    --msu-border:            #e7e7ee;
+    --msu-border-strong:     #d7d8e3;
+
+    // Text
+    --msu-text:              #2b2f3a;
+    --msu-text-muted:        #6b7280;
+
+    // Radii
+    --msu-radius-sm:         6px;
+    --msu-radius:            10px;
+    --msu-radius-lg:         16px;
+
+    // Elevation (layered, soft — matches Enterprise home-menu cards)
+    --msu-shadow-1:          0 1px 2px rgba(16, 24, 40, .04), 0 1px 3px rgba(16, 24, 40, .06);
+    --msu-shadow-2:          0 4px 8px rgba(16, 24, 40, .05), 0 2px 4px rgba(16, 24, 40, .04);
+    --msu-shadow-3:          0 12px 24px rgba(16, 24, 40, .08), 0 6px 12px rgba(16, 24, 40, .06);
+    --msu-shadow-pop:        0 16px 40px rgba(16, 24, 40, .14), 0 4px 12px rgba(16, 24, 40, .08);
+
+    // Semantic feedback
+    --msu-success:           #0f766e;
+    --msu-warning:           #b45309;
+    --msu-danger:            #b42318;
+    --msu-info:              #017e84;
+
+    // Motion (respect reduced-motion further down)
+    --msu-ease:              cubic-bezier(.22, .61, .36, 1);
+    --msu-dur-fast:          .12s;
+    --msu-dur:               .2s;
+    --msu-dur-slow:          .32s;
+}
+
+// Opening a dialog sets body.modal-open { position: fixed }, which hides the
+// document scrollbar and recenters overlays. Lock the body width so nothing
+// (including the command palette) jumps a few millimetres to the right.
+html {
+    scrollbar-gutter: stable;
+}
+html body.modal-open {
+    width: 100%;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    padding-right: 0 !important;
+}
+
+// Subtle, refined scrollbars across the backend --------------------------------
+.o_web_client {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--msu-border-strong) transparent;
+    }
+    *::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    *::-webkit-scrollbar-thumb {
+        background-color: var(--msu-border-strong);
+        border: 2px solid transparent;
+        background-clip: content-box;
+        border-radius: 999px;
+    }
+    *::-webkit-scrollbar-thumb:hover {
+        background-color: #b9bbc9;
+    }
+    *::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    // Mouse focus: no glow. Keyboard: a quiet accent ring.
+    .form-control:focus,
+    .form-select:focus,
+    .o_searchview:focus-within,
+    .btn:focus:not(:focus-visible),
+    .dropdown-toggle:focus:not(:focus-visible) {
+        box-shadow: none !important;
+        outline: none;
+    }
+    a:focus-visible,
+    button:focus-visible,
+    .btn:focus-visible,
+    .o_menuitem:focus-visible {
+        outline: 2px solid rgba(var(--msu-accent-rgb), .45);
+        outline-offset: 2px;
+        box-shadow: none !important;
+    }
+
+    // Navbar: keep teal active fill/border, but drop the extra focus ring.
+    .o_main_navbar .o_nav_entry,
+    .o_main_navbar .dropdown-toggle,
+    .o_main_navbar a,
+    .o_main_navbar button {
+        &:focus,
+        &:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+}
+
+// Global honouring of reduced-motion: the whole theme's motion collapses ---------
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --msu-dur-fast: 0s;
+        --msu-dur: 0s;
+        --msu-dur-slow: 0s;
+    }
+}

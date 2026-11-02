@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="msu_enterprise_ui.MessagingMenu.content" t-inherit="mail.MessagingMenu.content" t-inherit-mode="extension">
+        <xpath expr="//*[@t-ref='notification-list']" position="before">
+            <nav t-if="!ui.isSmall and !env.inDiscussApp" class="o_msu_inbox_rail" aria-label="Messaging">
+                <button t-foreach="msuRailItems" t-as="tab" t-key="tab.id"
+                    type="button"
+                    class="o_msu_inbox_rail_item"
+                    t-att-class="{ 'o-active': tab.kind === 'tab' and store.discuss.activeTab === tab.id }"
+                    t-on-click.stop="() => this.onClickMsuRail(tab)">
+                    <span class="o_msu_inbox_rail_icon">
+                        <i t-att-class="tab.icon"/>
+                        <t t-set="count" t-value="msuTabCounter(tab)"/>
+                        <span t-if="count" class="o_msu_inbox_rail_badge"><t t-esc="count"/></span>
+                    </span>
+                    <span class="o_msu_inbox_rail_label" t-esc="tab.label"/>
+                </button>
+            </nav>
+            <div t-if="!ui.isSmall and !env.inDiscussApp" class="o_msu_inbox_toolbar">
+                <t t-if="state.adding">
+                    <div class="o_msu_inbox_selector flex-grow-1" t-ref="selector">
+                        <ChannelSelector category="msuSelectorCategory" autofocus="true" onValidate.bind="onMsuSelectorDone" close.bind="onMsuSelectorClose"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <button type="button" class="o_msu_inbox_new" t-on-click.stop="onClickMsuNew">
+                        <t t-esc="msuNewLabel"/>
+                    </button>
+                    <label class="o_msu_inbox_search">
+                        <i class="oi oi-search" title="Search"/>
+                        <input type="text" class="o_msu_inbox_search_input" placeholder="Search" t-model="store.discuss.searchTerm"/>
+                    </label>
+                </t>
+            </div>
+            <div t-if="!ui.isSmall and !env.inDiscussApp" class="o_msu_inbox_filters">
+                <button type="button" class="o_msu_inbox_chip" t-att-class="{ 'o-active': state.msuFilter === 'all' }" t-on-click.stop="() => this.setMsuFilter('all')">All</button>
+                <button type="button" class="o_msu_inbox_chip" t-att-class="{ 'o-active': state.msuFilter === 'unread' }" t-on-click.stop="() => this.setMsuFilter('unread')">Unread</button>
+                <button type="button" class="o_msu_inbox_chip" t-att-class="{ 'o-active': state.msuFilter === 'thread' }" t-on-click.stop="() => this.setMsuFilter('thread')">Thread</button>
+            </div>
+        </xpath>
+    </t>
+</templates>

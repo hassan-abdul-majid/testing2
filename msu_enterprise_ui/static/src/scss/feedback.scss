@@ -1,0 +1,126 @@
+// ============================================================================
+// MSU Enterprise UI — Feedback & chrome
+// ----------------------------------------------------------------------------
+// Shared patterns for notifications, empty states, tooltips, alerts, tags,
+// autocomplete and the search panel. Tokens come from theme.scss.
+// ============================================================================
+
+.o_web_client {
+
+    // -- Toasts --------------------------------------------------------------
+    .o_notification_manager .o_notification {
+        border: 1px solid var(--msu-border);
+        border-radius: var(--msu-radius);
+        box-shadow: var(--msu-shadow-3);
+        overflow: hidden;
+
+        .o_notification_body {
+            color: var(--msu-text);
+        }
+    }
+
+    // -- Empty states --------------------------------------------------------
+    .o_view_nocontent .o_nocontent_help {
+        max-width: 28rem;
+        color: var(--msu-text-muted);
+        text-align: center;
+
+        > p:first-child,
+        .o_nocontent_help_title {
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: var(--msu-text);
+            letter-spacing: .01em;
+        }
+    }
+
+    // -- Alerts --------------------------------------------------------------
+    .alert {
+        border-radius: var(--msu-radius);
+        border-color: var(--msu-border);
+    }
+
+    // -- Tooltips ------------------------------------------------------------
+    .tooltip .tooltip-inner,
+    .o-tooltip {
+        border-radius: var(--msu-radius-sm);
+        box-shadow: var(--msu-shadow-2);
+        font-weight: 400;
+    }
+
+    // -- Autocomplete / many2one menus --------------------------------------
+    .o-autocomplete--dropdown-menu,
+    .ui-autocomplete {
+        border: 1px solid var(--msu-border);
+        border-radius: var(--msu-radius);
+        box-shadow: var(--msu-shadow-pop);
+        padding: 4px;
+        overflow: hidden;
+
+        .o-autocomplete--dropdown-item,
+        .ui-menu-item > a {
+            border-radius: var(--msu-radius-sm);
+        }
+    }
+
+    // -- Tags / chips --------------------------------------------------------
+    .o_field_tags .o_tag,
+    .o_badge {
+        border-radius: 999px;
+        font-weight: 500;
+    }
+
+    // -- Search panel --------------------------------------------------------
+    .o_search_panel {
+        background: var(--msu-surface);
+        border-right: 1px solid var(--msu-border);
+
+        .o_search_panel_section_header {
+            font-weight: 500;
+            letter-spacing: .02em;
+            color: var(--msu-text-muted);
+            font-size: .78rem;
+            text-transform: uppercase;
+        }
+
+        .o_search_panel_label:hover,
+        .o_search_panel_field header:hover {
+            background: var(--msu-surface-2);
+        }
+    }
+
+    // -- Settings ------------------------------------------------------------
+    .o_base_settings_view .o_form_renderer {
+        --settings__tab-bg: var(--msu-surface-2);
+        --settings__tab-bg--active: rgba(var(--msu-accent-rgb), .1);
+        --settings__tab-color: var(--msu-text);
+        --settings__title-bg: var(--msu-surface-2);
+    }
+
+    .o_setting_box {
+        border-radius: var(--msu-radius);
+        padding: 12px 12px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        transition: background-color var(--msu-dur-fast) var(--msu-ease);
+
+        &:hover {
+            background-color: var(--msu-surface-2);
+        }
+
+        // Boolean settings still render an empty .mt16 slot — that extra
+        // bottom space made the hover highlight look top-cramped.
+        .o_setting_right_pane > .mt16:not(:has(*)) {
+            display: none;
+        }
+
+        .o_setting_right_pane > .text-muted:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    // -- Status dots ---------------------------------------------------------
+    .o_status {
+        box-shadow: 0 0 0 2px var(--msu-surface);
+    }
+}

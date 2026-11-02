@@ -1,0 +1,57 @@
+// ============================================================================
+// MSU Enterprise UI — Login
+// ----------------------------------------------------------------------------
+// Frontend-only. The login layout reuses the home-menu gradient; this file
+// turns the stock 300px square card into a calmer, readable sign-in panel.
+// ============================================================================
+
+body.o_home_menu_background {
+    .card.o_database_list {
+        max-width: 360px !important;
+        padding: .25rem;
+        border-radius: var(--msu-radius-lg, 16px) !important;
+        box-shadow: var(--msu-shadow-pop, 0 16px 40px rgba(16, 24, 40, .14)) !important;
+        background: #fff !important;
+
+        .card-body {
+            padding: 1.5rem 1.35rem 1.25rem;
+        }
+
+        .form-label,
+        .col-form-label {
+            font-weight: 500;
+            font-size: .82rem;
+            color: #4b5563;
+            margin-bottom: .3rem;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            min-height: 2.4rem;
+            border-color: #e7e7ee;
+
+            &:focus {
+                border-color: #714B67;
+                box-shadow: none;
+            }
+        }
+
+        .oe_login_buttons .btn-primary {
+            min-height: 2.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            background-color: #714B67;
+            border-color: #714B67;
+
+            &:hover {
+                background-color: #5e3e56;
+                border-color: #543848;
+            }
+        }
+
+        .alert {
+            border-radius: 8px;
+            font-size: .85rem;
+        }
+    }
+}

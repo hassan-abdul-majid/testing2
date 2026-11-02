@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Student List View -->
+    <record id="student_admission_view_list" model="ir.ui.view">
+        <field name="name">student.admission.list</field>
+        <field name="model">student.admission</field>
+        <field name="arch" type="xml">
+            <list string="Student Admissions">
+                <field name="student_name"/>
+                <field name="student_id"/>
+                <field name="stdent_marks"/>
+                <field name="student_attendence"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-success="state == 'admitted'"
+                       decoration-danger="state == 'rejected'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Student Form View -->
+    <record id="student_admission_view_form" model="ir.ui.view">
+        <field name="name">student.admission.form</field>
+        <field name="model">student.admission</field>
+        <field name="arch" type="xml">
+            <form string="Student Admission">
+                <header>
+                    <button name="action_confirm_admission"
+                            type="object"
+                            string="Confirm Admission"
+                            class="btn-primary"
+                            groups="student_admission.group_admission_manager,base.group_system"
+                            invisible="state != 'draft'"/>
+
+                    <button name="action_reject_admission"
+                            type="object"
+                            string="Reject Admission"
+                            groups="student_admission.group_admission_manager,base.group_system"
+                            invisible="state != 'draft'"/>
+
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,admitted,rejected"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="student_name" readonly="state != 'draft'"/>
+                        <field name="student_id" readonly="state != 'draft'"/>
+                        <field name="stdent_marks" readonly="state != 'draft'"/>
+                        <field name="student_attendence" readonly="state != 'draft'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Student Action -->
+    <record id="student_admission_action" model="ir.actions.act_window">
+        <field name="name">Student Admissions</field>
+        <field name="res_model">student.admission</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Student Menu -->
+    <menuitem id="student_admission_menu"
+              name="Student Admissions"
+              action="student_admission_action"
+              groups="student_admission.group_admission_user,student_admission.group_admission_manager,base.group_system"
+              sequence="10"/>
+
+</odoo>

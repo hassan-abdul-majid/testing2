@@ -1,0 +1,60 @@
+.o_web_client {
+    .o_list_view .badge,
+    .o_kanban_record .badge,
+    .o_field_badge .badge,
+    .o_field_widget.o_field_label_selection .badge,
+    .o_field_label_selection .badge {
+        &.text-bg-success,
+        &.bg-success {
+            background-color: #1f4a38 !important;
+            color: #9ee6c0 !important;
+        }
+        &.text-bg-danger,
+        &.bg-danger {
+            background-color: #4a2428 !important;
+            color: #f5b4b8 !important;
+        }
+        &.text-bg-info,
+        &.bg-info {
+            background-color: #1a3d48 !important;
+            color: #8fd4e8 !important;
+        }
+        &.text-bg-warning,
+        &.bg-warning {
+            background-color: #4a3518 !important;
+            color: #f3c48a !important;
+        }
+        &.text-bg-primary,
+        &.bg-primary {
+            background-color: #3f3348 !important;
+            color: #e4c8ee !important;
+        }
+        &.text-bg-secondary,
+        &.text-bg-default,
+        &.text-bg-300,
+        &.bg-secondary,
+        &.bg-300 {
+            background-color: #3a3e4b !important;
+            color: #d1d5de !important;
+        }
+    }
+
+    .o_list_view .o_data_row:hover > .o_data_cell {
+        background-color: #2a2e3a;
+    }
+
+    .o_purchase_dashboard {
+        .g-col-4:nth-child(1) .btn-primary {
+            background: #243a52 !important;
+            color: #c5ddf5 !important;
+        }
+        .g-col-4:nth-child(2) .btn-primary {
+            background: #323644 !important;
+            color: #d1d5de !important;
+        }
+        .g-col-4:nth-child(3) .btn-primary {
+            background: #4a3518 !important;
+            color: #f3c48a !important;
+        }
+    }
+}

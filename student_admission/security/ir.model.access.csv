@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_admission_user,student.admission.user,model_student_admission,student_admission.group_admission_user,1,0,1,0
+access_student_admission_manager,student.admission.manager,model_student_admission,student_admission.group_admission_manager,1,1,1,1
+access_student_admission_system,student.admission.system,model_student_admission,base.group_system,1,1,1,1
+
